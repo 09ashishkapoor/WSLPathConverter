@@ -4,7 +4,7 @@ A lightweight, fully offline tool for converting paths between Windows and WSL (
 
 ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue) ![Platform](https://img.shields.io/badge/platform-Windows%20%2B%20WSL-lightgrey)
 
-![WSL Path Converter screenshot](screenshot.png)
+![WSL Path Converter screenshot](Screenshot.png)
 
 ## Download
 
