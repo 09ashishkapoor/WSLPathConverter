@@ -64,7 +64,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("WSL Path Converter")
-        self.geometry("600x460")
+        self.geometry("680x460")
         self.resizable(False, False)
         self.configure(bg="#1e1e2e")
 
@@ -137,10 +137,10 @@ class App(tk.Tk):
         self.entry_out.pack(side="left", ipady=6, fill="x", expand=True)
         tk.Button(out_frame, text="Copy", command=self._copy,
                   bg="#a6e3a1", fg="#1e1e2e", relief="flat", cursor="hand2",
-                  font=("Segoe UI", 9, "bold"), padx=10).pack(side="left", padx=(6, 0))
+                  font=("Segoe UI", 10, "bold"), padx=14, pady=5).pack(side="left", padx=(6, 0))
         tk.Button(out_frame, text="Copy as cd", command=self._copy_as_cd,
                   bg="#f38ba8", fg="#1e1e2e", relief="flat", cursor="hand2",
-                  font=("Segoe UI", 9, "bold"), padx=10).pack(side="left", padx=(4, 0))
+                  font=("Segoe UI", 10, "bold"), padx=14, pady=5).pack(side="left", padx=(6, 0))
 
         # ── History ────────────────────────────────────────────────────
         tk.Label(self, text="History (click to reuse):", bg=BG, fg=FG,
