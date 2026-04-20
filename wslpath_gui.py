@@ -138,6 +138,9 @@ class App(tk.Tk):
         tk.Button(out_frame, text="Copy", command=self._copy,
                   bg="#a6e3a1", fg="#1e1e2e", relief="flat", cursor="hand2",
                   font=("Segoe UI", 9, "bold"), padx=10).pack(side="left", padx=(6, 0))
+        tk.Button(out_frame, text="Copy as cd", command=self._copy_as_cd,
+                  bg="#f38ba8", fg="#1e1e2e", relief="flat", cursor="hand2",
+                  font=("Segoe UI", 9, "bold"), padx=10).pack(side="left", padx=(4, 0))
 
         # ── History ────────────────────────────────────────────────────
         tk.Label(self, text="History (click to reuse):", bg=BG, fg=FG,
@@ -201,6 +204,15 @@ class App(tk.Tk):
             self.clipboard_clear()
             self.clipboard_append(text)
             self.dir_label.config(text="Copied to clipboard!")
+            self.after(1500, lambda: self.dir_label.config(
+                text=f"Direction: {detect_and_convert(self.entry_in.get())[1]}"))
+
+    def _copy_as_cd(self):
+        text = self.entry_out.get()
+        if text:
+            self.clipboard_clear()
+            self.clipboard_append(f"cd {text}")
+            self.dir_label.config(text="Copied as 'cd <path>'!")
             self.after(1500, lambda: self.dir_label.config(
                 text=f"Direction: {detect_and_convert(self.entry_in.get())[1]}"))
 
