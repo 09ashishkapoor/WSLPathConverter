@@ -6,6 +6,14 @@ A lightweight, fully offline tool for converting paths between Windows and WSL (
 
 ![WSL Path Converter screenshot](screenshot.png)
 
+## Download
+
+**No Python required** — just download and run:
+
+👉 **[Download WSLPathConverter.exe](../../releases/latest)** (Windows, standalone)
+
+Or if you have Python 3.8+, clone and run directly — see [Usage](#usage) below.
+
 ## Why this exists
 
 If you're **vibe coding** — using AI tools like GitHub Copilot, Cursor, or Claude to build things fast — your workflow probably looks like this: code in Windows, run and test in WSL. That means you're constantly copying paths from Explorer or your IDE and needing them in a WSL terminal. The mental overhead of translating `C:\Users\me\project` → `/mnt/c/Users/me/project` and escaping spaces breaks your flow right when you want to stay in it.

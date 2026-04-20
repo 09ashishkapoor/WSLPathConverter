@@ -104,7 +104,7 @@ class App(tk.Tk):
                                  insertbackground=FG, relief="flat",
                                  font=("Cascadia Code", 10))
         self.entry_in.pack(padx=16, ipady=6)
-        self.entry_in.insert(0, r"C:\Users\kalbhairav\Documents\New project")
+        self.entry_in.insert(0, r"C:\Users\username\Documents\my-project")
         self.entry_in.bind("<KeyRelease>", self._on_type)
 
         # ── Options ────────────────────────────────────────────────────

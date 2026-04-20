@@ -36,4 +36,4 @@ if __name__ == "__main__":
         print(windows_to_wsl(input_path))
     else:
         print("Usage: python wslpath_conv.py <windows_path>")
-        print("Example: python wslpath_conv.py C:\\Users\\kalbhairav")
+        print("Example: python wslpath_conv.py C:\\Users\\username\\Documents\\my-project")
