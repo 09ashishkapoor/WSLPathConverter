@@ -1,43 +1,59 @@
 # WSL Path Converter
 
-A lightweight, fully offline tool for converting paths between Windows and WSL (Linux) formats. No internet connection required, no dependencies beyond the Python standard library.
+WSL Path Converter is a lightweight Windows utility for converting Windows paths to WSL/Linux paths and back. It runs fully offline, uses only the Python standard library, and can copy a ready-to-paste `cd` command for your WSL terminal.
 
-![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue) ![Platform](https://img.shields.io/badge/platform-Windows%20%2B%20WSL-lightgrey)
+![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue)
+![Platform](https://img.shields.io/badge/platform-Windows%20%2B%20WSL-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Latest release](https://img.shields.io/github/v/release/09ashishkapoor/WSLPathConverter?display_name=tag)
 
 ![WSL Path Converter screenshot](Screenshot.png)
 
 ## Download
 
-**No Python required** — just download and run:
+No Python required. Download the standalone Windows executable from the latest release:
 
-👉 **[Download WSLPathConverter.exe](../../releases/latest)** (Windows, standalone)
+-> **[Download WSLPathConverter.exe](../../releases/latest)**
 
-Or if you have Python 3.8+, clone and run directly — see [Usage](#usage) below.
+If you already have Python 3.8+, you can also run the project from source.
 
-## Why this exists
+## What Problem This Solves
 
-If you're **vibe coding** — using AI tools like GitHub Copilot, Cursor, or Claude to build things fast — your workflow probably looks like this: code in Windows, run and test in WSL. That means you're constantly copying paths from Explorer or your IDE and needing them in a WSL terminal. The mental overhead of translating `C:\Users\me\project` → `/mnt/c/Users/me/project` and escaping spaces breaks your flow right when you want to stay in it.
+If you work on Windows but run commands inside WSL, you constantly have to translate paths like:
 
-WSL ships with a built-in `wslpath` command, but it only works *from inside WSL*. This tool lives on the Windows side, converts in one click, and copies a ready-to-paste `cd` command to your clipboard. Zero friction, zero internet required.
+- `C:\Users\name\project` -> `/mnt/c/Users/name/project`
+- `/mnt/c/Users/name/project` -> `C:\Users\name\project`
+
+That usually happens when copying paths from Explorer, VS Code, Cursor, PowerShell, or Command Prompt into a WSL terminal. Linux includes `wslpath`, but it only runs inside WSL. This project gives you a Windows-side path converter so you can prepare the path before you paste it into Bash, zsh, or a shell command.
 
 ## Features
 
-- **Bidirectional** — converts Windows → WSL (`C:\…` → `/mnt/c/…`) and WSL → Windows (`/mnt/c/…` → `C:\…`) automatically
-- **Auto-detects direction** — just paste any path and it figures out which way to convert
-- **Live conversion** — result updates as you type
-- **Copy as `cd`** — copies the full `cd <path>` command ready to paste into your WSL terminal
-- **Shell-escape toggle** — optionally escapes spaces and parentheses for safe shell use
-- **Conversion history** — last 50 conversions listed; double-click to reload any entry
-- **Fully offline** — no network calls, no telemetry, no external packages
-- **Dark theme** GUI built with Tkinter (included in Python)
+- Windows path to WSL path conversion
+- WSL path to Windows path conversion in the GUI
+- Automatic direction detection for pasted input
+- Live conversion as you type
+- Copy the converted path or copy a full `cd <path>` command
+- Optional shell escaping for spaces and parentheses
+- Conversion history for the most recent 50 entries
+- Fully offline operation with no telemetry and no third-party packages
+
+## Common Use Cases
+
+- Convert a Windows file path from Explorer into a WSL-ready path
+- Turn a project folder into a ready-to-paste `cd` command
+- Move quickly between Windows editors and WSL terminals
+- Convert `/mnt/c/...` paths back into `C:\...` for Windows apps
+- Use a simple `wslpath` alternative from the Windows side
 
 ## Requirements
 
-- Python 3.8 or newer (standard library only — no `pip install` needed)
+- Windows
+- WSL if you want to use the converted Linux-style paths in a WSL shell
+- Python 3.8+ only when running from source
 
 ## Usage
 
-### GUI (recommended)
+### GUI
 
 ```bash
 python wslpath_gui.py
@@ -45,29 +61,42 @@ python wslpath_gui.py
 
 | Action | How |
 |---|---|
-| Convert | Type/paste path → result appears live; or press **Enter** |
-| Copy path | Click **Copy** |
-| Copy as shell command | Click **Copy as cd** |
-| Reverse a previous conversion | Double-click an entry in the History panel |
-| Clear | Press **Esc** or click **Clear** |
+| Convert a path | Type or paste a path and the result updates live, or press `Enter` |
+| Copy the converted path | Click `Copy` |
+| Copy a shell command | Click `Copy as cd` |
+| Reuse a previous conversion | Double-click an entry in the History panel |
+| Clear the form | Press `Esc` or click `Clear` |
 
 ### CLI
 
+The CLI helper currently converts Windows paths to WSL paths:
+
 ```bash
 python wslpath_conv.py "C:\Users\name\Documents\My Project"
-# → /mnt/c/Users/name/Documents/My\ Project
+# -> /mnt/c/Users/name/Documents/My\ Project
 
 python wslpath_conv.py C:\Users\name
-# → /mnt/c/Users/name
+# -> /mnt/c/Users/name
 ```
 
-## How it works
+## Build A Standalone EXE
 
-1. Detects the drive letter (e.g. `C:`) and maps it to `/mnt/c/`
-2. Replaces all backslashes with forward slashes
-3. For WSL → Windows, reverses the `/mnt/<drive>/` prefix back to `<DRIVE>:\`
-4. Optionally shell-escapes spaces (`\ `) and parentheses (`\(`, `\)`)
+If you want to build the Windows executable yourself:
+
+```bash
+pip install pyinstaller
+pyinstaller WSLPathConverter.spec
+```
+
+The generated executable will be written to `dist/`.
+
+## Why Use This Instead Of `wslpath`?
+
+- `wslpath` works inside WSL
+- WSL Path Converter works from Windows
+- The GUI is useful when you are copying paths from Windows tools into a WSL terminal
+- The `Copy as cd` action removes another manual step from the workflow
 
 ## License
 
-MIT
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
